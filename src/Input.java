@@ -11,11 +11,11 @@ import java.util.Map;
  */
 public class Input {
     private InputStream inputStream;
-    private Map<Object,Integer> map;
+    private Map<Object, Integer> map;
     private int counter = 0;
 
-    public Input(InputStream inputStream){
-        this.inputStream=inputStream;
+    public Input(InputStream inputStream) {
+        this.inputStream = inputStream;
         map = new IdentityHashMap<Object, Integer>();
 
     }
@@ -26,7 +26,7 @@ public class Input {
 
     public String readString() throws IOException {
         int size;
-        size=inputStream.read();
+        size = inputStream.read();
         byte[] name = new byte[size];
         inputStream.read(name);
         return new String(name);
@@ -34,14 +34,14 @@ public class Input {
 
     public Object readPersistable() throws IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
-        if (inputStream.available()==0) return null;
+        if (inputStream.available() == 0) return null;
         int size;
-        size=inputStream.read();
+        size = inputStream.read();
 
-        if (size==0) {
+        if (size == 0) {
             int linker = inputStream.read();
-            for (Map.Entry<Object,Integer> entry : map.entrySet()) {
-                if (entry.getValue()==linker) return entry.getKey();
+            for (Map.Entry<Object, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == linker) return entry.getKey();
             }
         }
 

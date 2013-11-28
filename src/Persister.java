@@ -12,7 +12,7 @@ public class Persister {
     private static final int marker = 123;
 
     public void serialize(Persistable persistable, OutputStream outputStream) throws IOException {
-        if( persistable==null) throw new NullPointerException("Object should not be null");
+        if (persistable == null) throw new NullPointerException("Object should not be null");
 
         Output output = new Output(outputStream);
         outputStream.write(marker);
@@ -26,13 +26,13 @@ public class Persister {
 
         Input input = new Input(inputStream);
         //read marker
-        if (inputStream.read()!=marker) throw new RuntimeException("Wrong stream");
+        if (inputStream.read() != marker) throw new RuntimeException("Wrong stream");
 
 
         //read class
-        if (inputStream.available()==0) return null;
+        if (inputStream.available() == 0) return null;
         int size;
-        size=inputStream.read();
+        size = inputStream.read();
         byte[] className = new byte[size];
         inputStream.read(className);
         Object newObj = Class.forName(new String(className)).newInstance();

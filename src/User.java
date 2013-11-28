@@ -11,7 +11,6 @@ public class User implements Persistable {
     private String name;
 
 
-
     private User friend;
 
     public User(int id, String name, User friend) {
@@ -31,7 +30,7 @@ public class User implements Persistable {
     }
 
     @Override
-    public void write (Output output) throws IOException {
+    public void write(Output output) throws IOException {
         output.write(id);
         output.write(name);
         output.write(friend);
@@ -39,7 +38,7 @@ public class User implements Persistable {
 
     @Override
     public String toString() {
-        return name  +
+        return name +
                 ", friend=" + friend.getName();
     }
 

@@ -7,8 +7,9 @@ import java.io.IOException;
  * Time: 12:13
  */
 public interface Persistable {
-    void write (Output output) throws IOException;
-    void read (Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
+    void write(Output output) throws IOException;
+
+    void read(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException;
 
 
 }

@@ -9,18 +9,18 @@ import java.io.FileOutputStream;
  * Time: 20:50
  */
 public class Starter {
-    public static void main(String[] args) throws Exception{
-        User user1 = new User(11,"user1", null);
-        User user2 = new User(22,"user2",user1);
-        User user3 = new User(33,"user3",user2);
-        User user4 = new User(44,"user4",user3);
+    public static void main(String[] args) throws Exception {
+        User user1 = new User(11, "user1", null);
+        User user2 = new User(22, "user2", user1);
+        User user3 = new User(33, "user3", user2);
+        User user4 = new User(44, "user4", user3);
         user1.setFriend(user4);
 
         System.out.println("Writing");
         File file = new File("data.txt");
         FileOutputStream fos = new FileOutputStream(file);
         Persister persister = new Persister();
-        persister.serialize(user4,fos);
+        persister.serialize(user4, fos);
         fos.close();
 
         user4 = null;
