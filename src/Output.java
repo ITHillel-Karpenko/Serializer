@@ -11,11 +11,12 @@ import java.util.Map;
  */
 public class Output {
     private OutputStream outputStream;
-    private Map<Persistable,Number> map;
+    private Map<Persistable,Integer> map;
+    private int counter = 0;
 
     public Output(OutputStream outputStream){
         this.outputStream=outputStream;
-        map = new IdentityHashMap<Persistable, Number>();
+        map = new IdentityHashMap<Persistable, Integer>();
     }
 
     public void write (int i) throws IOException {
@@ -30,10 +31,17 @@ public class Output {
     public void write (Persistable persistable) throws IOException{
         if (persistable==null) return;
         if (!map.containsKey(persistable)) {
-            map.put(persistable,null);
+            map.put(persistable,counter++);
             outputStream.write(persistable.getClass().getName().getBytes().length);
             outputStream.write(persistable.getClass().getName().getBytes());
             persistable.write(this);
+        }  else {
+       outputStream.write(0);
+       outputStream.write(map.get(persistable));
+
         }
+    }
+    public void addPersistable(Persistable persistable){
+        map.put(persistable,counter++);
     }
 }

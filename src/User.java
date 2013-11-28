@@ -10,9 +10,7 @@ public class User implements Persistable {
     private int id;
     private String name;
 
-    public void setFriend(User friend) {
-        this.friend = friend;
-    }
+
 
     private User friend;
 
@@ -41,10 +39,23 @@ public class User implements Persistable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", friend=" + friend +
-                '}';
+        return name  +
+                ", friend=" + friend.getName();
+    }
+
+    public void setFriend(User friend) {
+        this.friend = friend;
+    }
+
+    public User getFriend() {
+        return friend;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

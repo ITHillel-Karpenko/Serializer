@@ -11,11 +11,13 @@ import java.util.Map;
  */
 public class Input {
     private InputStream inputStream;
-    private Map<Persistable,Number> map;
+    private Map<Object,Integer> map;
+    private int counter = 0;
 
     public Input(InputStream inputStream){
         this.inputStream=inputStream;
-        map = new IdentityHashMap<Persistable, Number>();
+        map = new IdentityHashMap<Object, Integer>();
+
     }
 
     public int readInt() throws IOException {
@@ -35,16 +37,25 @@ public class Input {
         if (inputStream.available()==0) return null;
         int size;
         size=inputStream.read();
+
+        if (size==0) {
+            int linker = inputStream.read();
+            for (Map.Entry<Object,Integer> entry : map.entrySet()) {
+                if (entry.getValue()==linker) return entry.getKey();
+            }
+        }
+
         byte[] className = new byte[size];
         inputStream.read(className);
         Object newObj = Class.forName(new String(className)).newInstance();
+        map.put(newObj, counter++);
         ((Persistable) newObj).read(this);
+
         return newObj;
+    }
 
-
-//        if (!map.containsKey(persistable)) {
-//            map.put(persistable,null);
-//
+    public void addObject(Object object) {
+        map.put(object, counter++);
     }
 
 }

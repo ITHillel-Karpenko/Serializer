@@ -18,6 +18,7 @@ public class Persister {
         outputStream.write(marker);
         outputStream.write(persistable.getClass().getName().getBytes().length);
         outputStream.write(persistable.getClass().getName().getBytes());
+        output.addPersistable(persistable);
         persistable.write(output);
     }
 
@@ -35,6 +36,7 @@ public class Persister {
         byte[] className = new byte[size];
         inputStream.read(className);
         Object newObj = Class.forName(new String(className)).newInstance();
+        input.addObject(newObj);
         ((Persistable) newObj).read(input);
         return newObj;
     }
