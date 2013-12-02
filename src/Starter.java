@@ -26,7 +26,8 @@ public class Starter {
         user4 = null;
         user3 = null;
         user2 = null;
-        user1 = null;
+
+
 
         System.out.println("Reading");
         FileInputStream fis = new FileInputStream(file);
